@@ -11,7 +11,7 @@ class Patient
   def self.all
     returned_patients = DB.exec("SELECT * FROM patients;")
     patients = []
-    returned_patients.each do |list|
+    returned_patients.each do |patient|
       name = patient.fetch("name")
       birthday = patient.fetch("birthday")
       id = patient.fetch("id").to_i

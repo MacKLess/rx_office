@@ -49,7 +49,7 @@ describe(Doctor) do
   end
 
   describe("#==") do
-    it('is the same doctor if it has the same name, speciality, and ID') do
+    it('is the same doctor if they have the same name, speciality, and ID') do
       doctor1 = Doctor.new({:name => 'Dr. Zhivago', :speciality => "Russian method", :id => nil})
       doctor2 = Doctor.new({:name => 'Dr. Zhivago', :speciality => "Russian method", :id => nil})
       expect(doctor1).to(eq(doctor2))

@@ -19,7 +19,7 @@ describe(Patient) do
   end
 
   describe('#save') do
-    it('lets you save patients to the database') do
+    it('lets you add a patient to the database of patients') do
       patient = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
       patient.save
       expect(Patient.all()).to(eq([patient]))
