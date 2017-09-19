@@ -21,6 +21,11 @@ class Patient
     patients
   end
 
+  def save
+    result = DB.exec("INSERT INTO patients (name, birthday, doctor_id) VALUES ('#{@name}', '#{@birthday}', '#{@doctor_id}') RETURNING id;")
+    @id = result.first.fetch('id').to_i
+  end
+
   def self.find(id)
     found_patient = nil
     Patient.all.each do |patient|
@@ -31,12 +36,8 @@ class Patient
   found_patient
   end
 
-  def save
-    result = DB.exec("INSERT INTO patients (name, birthday, doctor_id) VALUES ('#{@name}', '#{@birthday}', '#{@doctor_id}') RETURNING id;")
-    @id = result.first.fetch('id').to_i
-  end
-
   def ==(another_patient)
     self.name().==(another_patient.name()).&(self.birthday().==(another_patient.birthday)).&(self.id().==(another_patient.id())).&(self.doctor_id().==(another_patient.doctor_id()))
   end
+
 end

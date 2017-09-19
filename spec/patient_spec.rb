@@ -36,15 +36,7 @@ describe(Patient) do
       patient = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
     end
   end
-
-  describe("#==") do
-    it('is the same patient if they have the same name, birthday, ID, and doctor ID') do
-      patient1 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
-      patient2 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
-      expect(patient1).to(eq(patient2))
-    end
-  end
-
+  
   describe('.find') do
     it('returns a patient by their id') do
       patient1 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
@@ -54,5 +46,14 @@ describe(Patient) do
       expect(Patient.find(patient2.id)).to(eq(patient2))
     end
   end
+
+  describe("#==") do
+    it('is the same patient if they have the same name, birthday, ID, and doctor ID') do
+      patient1 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
+      patient2 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
+      expect(patient1).to(eq(patient2))
+    end
+  end
+
 
 end
