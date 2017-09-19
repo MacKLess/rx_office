@@ -21,15 +21,15 @@ class Patient
     patients
   end
 
-  # def self.find(id)
-  #   found_patient = nil
-  #   Patient.all.each do |patient|
-  #     if patient.id == id
-  #       found_patient = patient
-  #     end
-  #   end
-  # found_patient
-  # end
+  def self.find(id)
+    found_patient = nil
+    Patient.all.each do |patient|
+      if patient.id == id
+        found_patient = patient
+      end
+    end
+  found_patient
+  end
 
   def save
     result = DB.exec("INSERT INTO patients (name, birthday, doctor_id) VALUES ('#{@name}', '#{@birthday}', '#{@doctor_id}') RETURNING id;")

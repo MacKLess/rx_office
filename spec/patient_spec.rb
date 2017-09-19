@@ -1,15 +1,4 @@
-require('rspec')
-require('pg')
-require('patient')
-require('pry')
-
-DB = PG.connect({:dbname => 'rx_office_test'})
-
-RSpec.configure do |config|
-  config.after(:each) do
-    DB.exec("DELETE FROM patients *;")
-  end
-end
+require('spec_helper')
 
 describe(Patient) do
   describe('.all') do
@@ -53,6 +42,16 @@ describe(Patient) do
       patient1 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
       patient2 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
       expect(patient1).to(eq(patient2))
+    end
+  end
+
+  describe('.find') do
+    it('returns a patient by their id') do
+      patient1 = Patient.new({:name => "Professor Plum", :birthday => "1892-07-10", :id => nil, :doctor_id => 2})
+      patient1.save
+      patient2 = Patient.new({:name => "B. Munchausen", :birthday => "1989-03-10", :id => nil, :doctor_id => 4})
+      patient2.save
+      expect(Patient.find(patient2.id)).to(eq(patient2))
     end
   end
 
