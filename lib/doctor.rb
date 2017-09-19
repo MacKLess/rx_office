@@ -39,5 +39,17 @@ class Doctor
     self.name().==(another_doctor.name()).&(self.speciality().==(another_doctor.speciality())).&(self.id().==(another_doctor.id()))
   end
 
-
+  def patients
+    # puts "SELECT * FROM patients WHERE doctor_id = #{@id};"
+    returned_patients = DB.exec("SELECT * FROM patients WHERE doctor_id = #{@id};")
+    patients = []
+    # binding.pry
+    returned_patients.each do |patient|
+      name = patient.fetch('name')
+      birthday = patient.fetch('birthday')
+      id = patient.fetch('id').to_i
+      patients.push(Patient.new({:name => name, :birthday => birthday, :id => id, :doctor_id => @id}))
+    end
+    patients
+  end
 end

@@ -47,7 +47,24 @@ describe(Doctor) do
     end
   end
 
-  describe("#==") do
+  describe('#patients') do
+    it('returns all the patients assigned to a doctor') do
+      doctor = Doctor.new({:name => "Dr. Pepper", :speciality => "Energy disorders", :id => nil})
+      doctor.save
+      # doctors = Doctor.all()
+      # # binding.pry
+      # doctor = doctors.last
+      patient1 = Patient.new({:name => "Cornelius Rooster", :birthday => "1962-02-02", :id => nil, :doctor_id => doctor.id})
+      patient2 = Patient.new({:name => "Henri de Toulouse Lautrec", :birthday => "1864-11-24", :id => nil, :doctor_id => doctor.id})
+      patient1.save
+      patient2.save
+      p patient2.doctor_id
+      p patient1.doctor_id
+      expect(doctor.patients).to(eq([patient1, patient2]))
+    end
+  end
+
+  describe('#==') do
     it('is the same doctor if they have the same name, speciality, and ID') do
       doctor1 = Doctor.new({:name => 'Dr. Zhivago', :speciality => "Russian method", :id => nil})
       doctor2 = Doctor.new({:name => 'Dr. Zhivago', :speciality => "Russian method", :id => nil})
